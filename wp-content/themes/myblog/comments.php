@@ -36,7 +36,7 @@ if ( post_password_required() ) {
 					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			} else {
-				printf( 
+				printf(
 					/* translators: 1: comment count number, 2: title. */
 					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $myblog_comment_count, 'comments title', 'myblog' ) ),
 					number_format_i18n( $myblog_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -69,9 +69,14 @@ if ( post_password_required() ) {
 			<?php
 		endif;
 
-	endif; // Check for have_comments().
+    endif; // Check for have_comments().
 
-	comment_form();
+
+    $comments_args = array(
+        'class_submit' => 'comments-submit',
+    );
+
+	comment_form( $comments_args );
 	?>
 
 </div><!-- #comments -->
