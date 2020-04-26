@@ -11,30 +11,32 @@ get_header();
 ?>
 
 	<main id="primary" class="site-main">
+        <section class="content">
+            <div class="container">
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+                <div class="navigation">
+                    <a href="/"><?= __('Home', 'myblog'); ?></a>
+                    /  <a href="/blog"><?= __('Blog', 'myblog'); ?></a>
+                    <p>  /  <?php the_title(); ?></p>
+                </div>
 
-			get_template_part( 'template-parts/content', get_post_type() );
+                <?php
+                while ( have_posts() ) :
+                    the_post();
 
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'myblog' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'myblog' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+                    get_template_part( 'template-parts/content', get_post_type() );
 
-		endwhile; // End of the loop.
-		?>
+                    get_template_part( 'template-parts/sidebar-blog' );
 
+                endwhile; // End of the loop.
+
+                ?>
+
+            </div>
+        </section>
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+
 get_footer();
